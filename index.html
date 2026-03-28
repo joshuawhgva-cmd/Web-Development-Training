@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test Website</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    
+    <div class="hero">
+      <video controls width="100%" class="hero-image" loop>
+        <source src="image/CyberGard MP4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="buttons" role="navigation" aria-label="Main actions">
+        <a class="radial-btn" id="learn" href="https://en.wikipedia.org/wiki/T-1000" target="_blank" aria-label="Learn More">Learn More</a>
+        <a class="radial-btn" id="contact" href="mailto:contact@cyberdyne.com" aria-label="Contact Us">Contact Us</a>
+        <a class="radial-btn" id="pay" href="https://www.venmo.com" target="_blank" aria-label="Pay Now">Pay Now</a> 
+        <button class="radial-btn" id="feedback" type="button" aria-label="Provide Feedback">Feedback</button>
+      </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Tell us how we did</h2>
+        <p>Please help us improve with your feedback:</p>
+        <form id="feedbackForm">
+          <div class="form-group question-group">
+            <label class="question-label">How would you rate the system performance?</label>
+            <div class="choice-group">
+              <label><input type="radio" name="performance" value="Bad" required /> Bad</label>
+              <label><input type="radio" name="performance" value="Good" /> Good</label>
+              <label><input type="radio" name="performance" value="Best" /> Best</label>
+            </div>
+          </div>
+
+          <div class="form-group question-group">
+            <label class="question-label">How intuitive is the user interface?</label>
+            <div class="choice-group">
+              <label><input type="radio" name="interface" value="Bad" required /> Bad</label>
+              <label><input type="radio" name="interface" value="Good" /> Good</label>
+              <label><input type="radio" name="interface" value="Best" /> Best</label>
+            </div>
+          </div>
+
+          <div class="form-group question-group">
+            <label class="question-label">Are all required features available?</label>
+            <div class="choice-group">
+              <label><input type="radio" name="features" value="Bad" required /> Bad</label>
+              <label><input type="radio" name="features" value="Good" /> Good</label>
+              <label><input type="radio" name="features" value="Best" /> Best</label>
+            </div>
+          </div>
+
+          <div class="form-group question-group">
+            <label class="question-label">How responsive is technical support?</label>
+            <div class="choice-group">
+              <label><input type="radio" name="support" value="Bad" required /> Bad</label>
+              <label><input type="radio" name="support" value="Good" /> Good</label>
+              <label><input type="radio" name="support" value="Best" /> Best</label>
+            </div>
+          </div>
+
+          <div class="form-group question-group">
+            <label class="question-label">How confident are you in the system's security?</label>
+            <div class="choice-group">
+              <label><input type="radio" name="security" value="Bad" required /> Bad</label>
+              <label><input type="radio" name="security" value="Good" /> Good</label>
+              <label><input type="radio" name="security" value="Best" /> Best</label>
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button type="submit" class="form-btn">Submit Feedback</button>
+            <button type="button" class="form-btn form-btn-cancel" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const feedbackBtn = document.getElementById('feedback');
+      const feedbackModal = document.getElementById('feedbackModal');
+      const closeBtn = document.querySelector('.modal-close');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const feedbackForm = document.getElementById('feedbackForm');
+
+      feedbackBtn.addEventListener('click', function() {
+        feedbackModal.style.display = 'flex';
+      });
+
+      closeBtn.addEventListener('click', function() {
+        feedbackModal.style.display = 'none';
+      });
+
+      cancelBtn.addEventListener('click', function() {
+        feedbackModal.style.display = 'none';
+      });
+
+      feedbackModal.addEventListener('click', function(event) {
+        if (event.target === feedbackModal) {
+          feedbackModal.style.display = 'none';
+        }
+      });
+
+      feedbackForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const performance = document.querySelector('input[name="performance"]:checked')?.value || 'Not answered';
+        const interfaceRating = document.querySelector('input[name="interface"]:checked')?.value || 'Not answered';
+        const features = document.querySelector('input[name="features"]:checked')?.value || 'Not answered';
+        const support = document.querySelector('input[name="support"]:checked')?.value || 'Not answered';
+        const security = document.querySelector('input[name="security"]:checked')?.value || 'Not answered';
+        
+        alert('Thank you for your feedback!\n\nPerformance: ' + performance + '\nInterface: ' + interfaceRating + '\nFeatures: ' + features + '\nSupport: ' + support + '\nSecurity: ' + security);
+        feedbackModal.style.display = 'none';
+        feedbackForm.reset();
+      });
+    </script>
+  </body>
+</html>
